@@ -1,0 +1,151 @@
+unit Unit1;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Buttons, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    Memo1: TMemo;
+    Memo2: TMemo;
+    Panel1: TPanel;
+    Memo3: TMemo;
+    Edit1: TEdit;
+    Edit2: TEdit;
+    RadioGroup1: TRadioGroup;
+    Edit3: TEdit;
+    Edit4: TEdit;
+    Label1: TLabel;
+    BitBtn1: TBitBtn;
+    Panel2: TPanel;
+    Edit5: TEdit;
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+{$R *.dfm}
+
+type
+  TMatrix = array of array of Real;
+
+procedure PrintMatrix(matrix: TMatrix;n:Integer;m:Integer; Memo:Tmemo);
+var i,j:Integer;
+    line:String;
+begin
+  Memo.Clear;
+   for i := 0 to (n-1) do
+   begin
+     line := '';
+     for j := 0 to (m-1) do
+       line := line + FloatToStrF(matrix[i,j],ffFixed,3,1) + ' ';
+
+       Memo.Lines.Add(Trim(line));
+   end;
+end;
+
+procedure Triangle(var Matrix:TMatrix; n:integer; m:integer);
+var i,j,k:Integer;
+    temp,x:extended;
+begin
+  for i := 0 to (n-2) do
+    begin
+      if (Matrix[i,i] = 0) then
+      begin
+        ShowMessage('Error!!!!');
+        j:=0;
+        for k := i+1 to (n-1) do
+          if (Matrix[k,i] <> 0) then
+          begin
+            j:=k;
+            break;
+          end;
+
+        for k := 0 to (m-1) do
+          begin
+            x:=Matrix[j,k];
+            Matrix[j,k] := Matrix[0,k];
+            Matrix[0,k] := x;
+          end;
+
+          for k := 0 to (n-1) do
+            for j := 0 to (m-1) do
+              Matrix[k,j] := Matrix[k,j] * (-1);
+      end;
+      if (Matrix[i,i] <> 0.0) then
+      for j := i+1 to (n-1) do
+        begin
+          temp:=Matrix[j,i] / matrix[i,i];
+          for k := i to (m-1) do
+            Matrix[j,k] := Matrix[j,k] - temp * Matrix[i,k];
+        end;
+    end;
+end;
+
+procedure TriangleTop(var Matrix:TMatrix;n:Integer;m:integer);
+var i,j,k: integer;
+    temp,x:extended;
+begin
+   for i := n-1 downto 1 do
+     begin
+       for j := i-1 downto 0 do
+       begin
+         temp := Matrix[j,i] / Matrix[i,i];
+         for k := i to (m-1) do
+           Matrix[j,k] := Matrix[j,k] - temp * Matrix[i,k];
+     end;
+end;
+end;
+
+function FDeterminant(Matrix:TMatrix;n:Integer;m:Integer):Real;
+var i:Integer;
+    Det:Real;
+begin
+  if (n <> m) then
+  begin
+    ShowMessage('!Determinant is calculated only for square matrix!');
+    Result:=0.0;
+  end else
+  begin
+    Triangle(Matrix,n,m);
+    Det := 1.0;
+    for i := 0 to (n - 1) do
+      Det := Det * Matrix[i,i];
+
+      Result := Det;
+  end;
+end;
+
+function FRang(Matrix:TMatrix;n:Integer;m:Integer):Integer;
+var i, j, counter: integer;
+  isZero: Boolean;
+begin
+  Triangle(Matrix, n, m);
+  counter := n;
+  for i := 0 to (n-1) do
+  begin
+    isZero := True;
+    for j := 0 to (m-1) do
+    begin
+      if(matrix[i, j] <> 0.0) then
+      begin
+        isZero := False;
+        break;
+      end;
+    end;
+    if isZero then
+      counter := counter - 1;
+  end;
+
+  Result := counter;
+end;
+
+end.

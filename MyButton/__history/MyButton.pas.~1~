@@ -1,0 +1,29 @@
+unit GraphicControl1;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls;
+
+type
+  TMuborakshoButton = class(TGraphicControl)
+  private
+    { Private declarations }
+  protected
+    { Protected declarations }
+  public
+    { Public declarations }
+  published
+    { Published declarations }
+  end;
+
+procedure Register;
+
+implementation
+
+procedure Register;
+begin
+  RegisterComponents('Standard', [TMuborakshoButton]);
+end;
+
+end.

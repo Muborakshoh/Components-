@@ -1,0 +1,71 @@
+unit MyButton;
+
+interface
+
+uses
+  System.SysUtils, System.Classes, Vcl.Controls, System.Math, Vcl.ExtCtrls,Vcl.Graphics,System.Types,Winapi.Windows;
+
+type
+  TButtonShape = (bsRectangle, bsRoundRect,bsEllipse,bsPolygon);
+  TPolygonType = (bsTriangle,bsRect,bsFive,bsSix,bsStar);
+  TAngles = (bs0,bs90,bs180,bs270);
+
+  TMuborakshoButton = class(TGraphicControl)
+  private
+    FButtonShape: TButtonShape;
+    FCornerRadius:Integer;
+    FPolygonType:TPolygonType;
+    FBackColor:TColor;
+    FHeaderFont:TFont;
+    FAngles:TAngles;
+    FHeader:string;
+    procedure SetButtonShape(const value: TButtonShape);
+    procedure SetCornerRadius(const value: Integer);
+    procedure SetPolygonType(const value: TPolygonType);
+    procedure SetBackColor(const value: TColor);
+    procedure SetHeaderFont(const value: TFont);
+    procedure SetHeader(const value:string);
+    procedure SetHeaderRotationAngle(const value:TAngles);
+  protected
+    procedure Paint;override;
+  public
+    constructor Create(AOwner: TComponent); override;
+    destructor Destroy;override;
+  published
+    property ButtonShape: TButtonShape read FButtonShape write SetButtonShape default bsRectangle;
+    property CornerRadius: Integer read FCornerRadius write SetCornerRadius default 0;
+    property PolygonType: TPolygonType read FPolygonType write SetPolygonType default bsRect;
+    property BackgroundColor: TColor read FBackColor write SetBackColor default clBtnFace;
+    property HeaderFont: TFont read FHeaderFont write SetHeaderFont;
+    property Header: string read FHeader write SetHeader;
+    property HeaderRotationAngle: TAngles read FAngles write SetHeaderRotationAngle default bs0;
+  end;
+
+procedure Register;
+
+implementation
+
+procedure RotateText(Canvas: TCanvas;const Text:string; X,Y,Angle:Integer);
+var LogFont: TLogFont;
+    FontHandle,OldFontHandle: HFONT;
+    GraphicsMode,OldGraphicsMode:Integer;
+    WorldTransform:TXForm;
+    TextWidth, TextHeight:Integer;
+    RotatedX,RotatedY:Integer;
+begin
+  OldGraphicsMode:=SetGraphicsMode(Canvas.Handle,GM_ADVANCED);
+
+  GetWorldTransform(Canvas.Handle,WorldTransform);
+
+  GetObject(Canvas.Font.Handle,SizeOf(TLogFont),@LogFont);
+  FontHandle := CreateFontIndirect(LogFont);
+
+  OldFontHandle := SelectObject()
+end;
+
+procedure Register;
+begin
+  RegisterComponents('Standard', [TMuborakshoButton]);
+end;
+
+end.

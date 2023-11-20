@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>1899.12.30 00:00:00.000.823,=C:\Users\HP\Desktop\C++\3 курс 2 семестр\СППО\Component MyButton\MyButton.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.301,=C:\Users\HP\Desktop\C++\3 курс 2 семестр\СППО\Component MyLabel\MyLabel.pas</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.110,C:\Users\HP\Desktop\C++\3 курс 2 семестр\СППО\Component MyLabel\Package1.dproj=C:\Users\HP\Documents\Embarcadero\Studio\Projects\Package1.dproj</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.146,=vcl.dcp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.449,=rtl.dcp</Transaction>
+    <Transaction>1899.12.30 00:00:00.000.366,=rtl.dcp</Transaction>
+  </Transactions>
+</BorlandProject>

@@ -1,0 +1,32 @@
+object Form1: TForm1
+  Left = 0
+  Top = 0
+  Caption = 'Form1'
+  ClientHeight = 442
+  ClientWidth = 628
+  Color = clBtnFace
+  Font.Charset = DEFAULT_CHARSET
+  Font.Color = clWindowText
+  Font.Height = -12
+  Font.Name = 'Segoe UI'
+  Font.Style = []
+  TextHeight = 15
+  object MuborakshoLabel1: TMuborakshoLabel
+    Left = 88
+    Top = 200
+    Width = 402
+    Height = 105
+    AutoSize = False
+    Caption = '19:40:22'
+    Font.Charset = RUSSIAN_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -24
+    Font.Name = 'Times New Roman'
+    Font.Style = [fsBold]
+    ParentFont = False
+    WordWrap = True
+    ThreeDimensionalityMode = True
+    BlinkMode = 100
+    CaptionTextType = bsTime
+  end
+end
